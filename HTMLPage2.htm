@@ -1,0 +1,189 @@
+﻿<table align="center" cellspacing="2" cellpadding="2"  width="100%" height="400" bgcolor="WhiteSmoke">
+                                        <tr align="left" valign="top">
+                                            <td>
+                                                <SPAN class="header1">GENERAL</SPAN>&nbsp;<SPAN class="header2">INFORMATION</SPAN><BR>
+									            <TABLE  align="center" cellSpacing="0" cellPadding="0" border="0">
+									                        <TR>
+														                <TD class="form1">Project Name:<br />
+															                <asp:textbox id="txtprjname" runat="server" MaxLength="17" Width="224px"></asp:textbox>
+
+															                <br />
+															                <asp:RequiredFieldValidator ID="rrprjname" 
+                                                                            ControlToValidate="txtprjname" ErrorMessage="Project Name is Required" 
+                                                                            runat="server"></asp:RequiredFieldValidator>
+
+														                </TD>
+														                <TD vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+														                <TD class="form1" style="width: 151px">Project Type:<br />
+															                <asp:dropdownlist id="ddlprjtype" runat="server"></asp:dropdownlist>
+
+															                <br /><asp:RequiredFieldValidator ID="rrprjtype" 
+                                                                                    ControlToValidate="ddlprjtype" ErrorMessage="Project Type is Required" 
+                                                                                    runat="server"></asp:RequiredFieldValidator>
+
+														                </TD>
+														                <TD vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+														                <TD class="form1" style="width: 151px">Architect:<br />
+															                <asp:dropdownlist id="ddlarchitect" runat="server"></asp:dropdownlist>
+
+														                </TD>
+												              </tr>
+												     
+												             <tr>
+																	        <TD colSpan="5"><IMG height="10" alt="" Src="assets/img/spacer.gif" width="1"></TD>
+													         </tr>
+        															
+															
+												             <tr>
+														                <td class="form1">Assigned Estimator:<br />
+														                    <asp:dropdownlist id="ddlEstimator" runat="server"></asp:dropdownlist>
+
+															                <br />
+															                <asp:RequiredFieldValidator ID="rrestimator" 
+                                                                            ControlToValidate="ddlEstimator" ErrorMessage="Estimator is Required" 
+                                                                            runat="server"></asp:RequiredFieldValidator>
+
+														                </td>
+        														        
+														                <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+        														        
+														                <td class="form1">Base Bid:<br />
+																		        <asp:textbox id="txtbasebid" runat="server" MaxLength="17" Width="224px" onBlur="this.value=formatCurrency(this.value);"></asp:textbox>
+                                                                        </td>
+															            <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+
+															            <td class="form1">Final Price:<br />
+																		        <asp:textbox id="txtfinalbid" runat="server" MaxLength="17" Width="224px" onBlur="this.value=formatCurrency(this.value);"></asp:textbox>
+                                                                        </td>
+												            </tr>   
+															
+															<tr>
+																	<TD colSpan="5"><IMG height="10" alt="" Src="assets/img/spacer.gif" width="1"></TD>
+															</tr>
+															
+															<tr>
+															        <TD class="form1">Project Description:<br />
+																		<asp:textbox id="txtdesc" runat="server" TextMode=MultiLine Rows="6" 
+                                                                        cols="80"></asp:textbox>
+                                                                        </TD>
+															        <TD vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <TD class="form1">Notes/Comments:<br />
+																		<asp:textbox id="txtNotes" runat="server" TextMode=MultiLine Rows="6" 
+                                                                    cols="80"></asp:textbox>
+                                                                    </TD>
+																	<TD vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+																	<td class="form1">Bidding Contractor:<br />
+															            <asp:ListBox ID="lstbidclient" runat="server"></asp:ListBox>
+
+															        </td>
+															</tr>
+															
+															<tr>
+															        <td class="form1">Winning Contractor:<br />
+															        <asp:dropdownlist id="ddlwonclient" runat="server"></asp:dropdownlist>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Competition Set:<br />
+															            <asp:ListBox ID="lstcompe" runat="server"></asp:ListBox>
+
+															        </td>															
+    														        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Winning Competitor:<br />
+															        <asp:dropdownlist id="ddlwoncompe" runat="server"></asp:dropdownlist>
+
+															        </td>
+															
+															</tr>
+															
+															<tr>
+															        <td class="form1">Project Status:<br />
+															            <asp:dropdownlist id="ddlPrjStatus" runat="server"></asp:dropdownlist>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Bid Date:<br />
+															            <asp:TextBox ID="txtBidDate" runat="server" MaxLength="17" Width="150px"></asp:TextBox>
+
+															            <asp:ImageButton runat="server"  ID="ImgBidDate"  
+                                                                            ImageUrl="assets/img/calendar.gif" 
+                                                                            AlternateText="Click here to display calendar" />
+ 
+															            <ajaxToolkit:CalendarExtender ID="CalBidDate" runat="server" 
+                                                                            Format="MM/dd/yyyy HH:mm" TargetControlID="txtBidDate" 
+                                                                            PopupButtonID="ImgBidDate" Enabled="True"/>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Bid Time:<br />															        															           
+															                <asp:TextBox ID="txtEditStartTime" runat="server" MaxLength="8"></asp:TextBox>
+                                                                           
+                                                                            <ajaxToolkit:MaskedEditExtender ID="m1" runat="server" Mask="99:99:99" 
+                                                                            MaskType="Time" AcceptAMPM="True" TargetControlID="txtEditStartTime" 
+                                                                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
+                                                                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
+                                                                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True"></ajaxToolkit:MaskedEditExtender>
+
+                                                                            <ajaxToolkit:MaskedEditValidator ID="mv1" runat="server" 
+                                                                            ControlExtender="m1" ControlToValidate="txtEditStartTime"
+                                                                                Display="None" EmptyValueMessage="Time is required" 
+                                                                            InvalidValueMessage="Valid Bid Time in HH:MM" TooltipMessage="Input a time" 
+                                                                            ErrorMessage="mv1"></ajaxToolkit:MaskedEditValidator>
+
+															        </td>
+															</tr>
+															
+															<tr>
+															        <td class="form1">Anticipated Review Duration:<br />
+															            <asp:TextBox ID="txtARD" runat="server"></asp:TextBox>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Projected Award Date:<br />
+															            <asp:TextBox ID="txtawardDate" runat="server" MaxLength="17" Width="150px"></asp:TextBox>
+
+															            <asp:ImageButton runat="server"  ID="imgaward"  
+                                                                            ImageUrl="assets/img/calendar.gif" 
+                                                                            AlternateText="Click here to display calendar" />
+ 
+															            <ajaxToolkit:CalendarExtender ID="CalAwardDt"  Format="MM/dd/yyyy"  
+                                                                            runat="server" TargetControlID="txtawardDate" PopupButtonID="imgaward" 
+                                                                            Enabled="True"/>
+
+															        </td>
+															         <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Construction Duration:<br />
+															            <asp:TextBox ID="txtConstDuration" runat="server"></asp:TextBox>
+
+															        </td>
+															 </tr>
+															 <tr> 
+															 		 <td class="form1">Construction End Date:<br />
+															            <asp:TextBox ID="txtConstEndDate" runat="server" MaxLength="17" Width="150px"></asp:TextBox>
+
+															            <asp:ImageButton runat="server"  ID="imgconstEnd"  
+                                                                             ImageUrl="assets/img/calendar.gif" 
+                                                                             AlternateText="Click here to display calendar" />
+ 
+															            <ajaxToolkit:CalendarExtender ID="CalConstEnd" Format="MM/dd/yyyy"  
+                                                                             runat="server" TargetControlID="txtConstEnddate" PopupButtonID="imgconstEnd" 
+                                                                             Enabled="True"/>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td class="form1">Construction Start Date:<br />
+															            <asp:TextBox ID="txtConstStdate" runat="server" MaxLength="17" Width="150px"></asp:TextBox>
+
+															            <asp:ImageButton runat="server"  ID="imgConst"  
+                                                                            ImageUrl="assets/img/calendar.gif" 
+                                                                            AlternateText="Click here to display calendar" />
+ 
+															            <ajaxToolkit:CalendarExtender ID="CalConst" Format="MM/dd/yyyy"  runat="server" 
+                                                                            TargetControlID="txtConstStdate" PopupButtonID="imgConst" Enabled="True"/>
+
+															        </td>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															        <td vAlign="top" width="50"><IMG height="1" alt="" Src="assets/img/spacer.gif" width="50"></TD>
+															</tr>
+                                                         </TABLE>
+                                                         </td></TR></TABLE>

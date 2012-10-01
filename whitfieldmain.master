@@ -1,0 +1,208 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="whitfieldmain.master.cs" Inherits="whitfieldmain"    %>
+<%@ Register TagPrefix="uc1" TagName="navadmin"     Src="whitfieldnav.ascx" %>
+<%@ Register TagPrefix="uc2" TagName="navpuser"     Src="whitfieldnavpuser.ascx" %>
+<%@ Register TagPrefix="uc3" TagName="navestimator"     Src="whitfieldnavestimator.ascx" %>
+<%@ Register TagPrefix="uc4" TagName="navInstaller"     Src="whitfieldInstaller.ascx" %>
+<%@ Import Namespace="System.Data" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Welcome to Whitfield-co Project management systetms</title>
+	<link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+	<link rel="stylesheet" href="assets/css/dhtmlwindow.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/modal.css" type="text/css" />
+	<meta name="CODE_LANGUAGE" Content="C#" />
+	<meta name="vs_defaultClientScript" content="JavaScript" />
+	<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+	<script type="text/javascript" src="assets/js/dhtmlwindow.js"></script>
+	<script type="text/javascript" src="assets/js/modal.js"></script>
+    <script src="assets/highslide/highslide-full.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	        hs.align='center';
+	        hs.graphicsDir = 'assets/highslide/graphics/';
+	        hs.outlineType = 'rounded-white';
+	        hs.outlineWhileAnimating = true;
+	        hs.showCredits = false;
+	        hs.moveText = '';
+
+	        
+	        
+	        function isNumber(field) {
+	            var re = /^[0-9-'.'-',']*$/;
+	            if (!re.test(field.value)) {
+	                //alert('Value must be all numberic charcters, including "." or "," non numerics will be removed from field!');
+	                field.value = field.value.replace(/[^0-9-'.'-',']/g, "");
+	            }
+	        }
+	        function formatCurrency(num) {
+	            num = num.toString().replace(/\$|\,/g, '');
+	            if (isNaN(num))
+	                num = "0";
+	            sign = (num == (num = Math.abs(num)));
+	            num = Math.floor(num * 100 + 0.50000000001);
+	            cents = num % 100;
+	            num = Math.floor(num / 100).toString();
+	            if (cents < 10)
+	                cents = "0" + cents;
+	            for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+	                num = num.substring(0, num.length - (4 * i + 3)) + ',' +
+                num.substring(num.length - (4 * i + 3));
+	            return (((sign) ? '' : '-') + '$' + num + '.' + cents);
+	        }
+	        function formatCurrencyNoSign(num) {
+	            num = num.toString().replace(/\$|\,/g, '');
+	            if (isNaN(num))
+	                num = "0";
+	            sign = (num == (num = Math.abs(num)));
+	            num = Math.floor(num * 100 + 0.50000000001);
+	            cents = num % 100;
+	            num = Math.floor(num / 100).toString();
+	            if (cents < 10)
+	                cents = "0" + cents;
+	            for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+	                num = num.substring(0, num.length - (4 * i + 3)) + ',' +
+                num.substring(num.length - (4 * i + 3));
+	            return (((sign) ? '' : '-') + num + '.' + cents);
+	        }
+
+	        function formatNumber() {
+	            if (!(event.keyCode == 45 || event.keyCode == 46 || event.keyCode == 48 || event.keyCode == 49 || event.keyCode == 50 || event.keyCode == 51 || event.keyCode == 52 || event.keyCode == 53 || event.keyCode == 54 || event.keyCode == 55 || event.keyCode == 56 || event.keyCode == 57)) { event.returnValue = false; }
+	        }
+
+    </script>
+    
+ 
+    
+    <style type="text/css">
+        .fancy .ajax__tab_header 
+        {
+	        font-size:13px;
+	        font-weight:bold;
+	        color:#000000;
+            font-family:sans-serif;
+             background:url(assets/img/blue_bg.jpg) repeat-x;
+        }
+        .fancy .ajax__tab_active .ajax__tab_outer,
+        .fancy .ajax__tab_header .ajax__tab_outer,
+        .fancy .ajax__tab_hover .ajax__tab_outer
+        {
+            height:46px;
+            background:url(assets/img/blue_left.jpg) no-repeat left top;
+        }
+        .fancy .ajax__tab_active .ajax__tab_inner,
+        .fancy .ajax__tab_header .ajax__tab_inner,
+        .fancy .ajax__tab_hover .ajax__tab_inner
+        {
+            height:46px;
+            margin-left:16px; /* offset the width of the left image */
+            background:url(assets/img/blue_right.jpg) no-repeat right top;
+        }
+        .fancy .ajax__tab_active .ajax__tab_tab,
+        .fancy .ajax__tab_hover .ajax__tab_tab,
+        .fancy .ajax__tab_header .ajax__tab_tab
+        {
+	        margin:16px 16px 0px 0px;
+        }
+        .fancy .ajax__tab_hover .ajax__tab_tab,
+        .fancy .ajax__tab_active .ajax__tab_tab 
+        {
+	        color:#cccccc;
+        }
+        .fancy .ajax__tab_body 
+        {
+            font-family:verdana,tahoma,helvetica;
+            font-size:10pt;
+            border:1px solid #999999;
+            border-top:0;
+            padding:2px;
+            background-color:White;
+        }
+
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <TABLE cellSpacing="0" cellPadding="0" width="100%" border="0">
+	        <TR>
+	        <%if (Request.Cookies["RoleId"].Value == "5")
+            { 
+            %>
+		        <TD><A href="installer_projects.aspx"><IMG height="80" alt="" src="assets/img/TWC Primary Logo1.JPG" border="0"></A></TD>
+		        <%
+               }
+               else
+               { 
+                %>
+		    <TD><A href="whitfieldmain.aspx"><IMG height="80" alt="" src="assets/img/TWC Primary Logo1.JPG" border="0"></A></TD>
+		    <%
+           } 
+           %>
+		        <TD class="form1" vAlign="bottom" align="right" width="100%"><IMG height="16" alt="" src="assets/img/logged.gif" width="16">&nbsp;Welcome:&nbsp;<asp:label id="lblUser" runat="server"></asp:label>
+			        |
+			        <asp:linkbutton id="btnLogout" runat="server" Text="Logout" 
+                        causesvalidation="False" tooltip="Logout of the Application"
+				        ForeColor="#330000" onclick="btnLogout_Click">
+				        <b>LOGOUT</b></asp:linkbutton><BR>
+			        <IMG height="9" alt="" src="assets/img/images.gif" width="1"></TD>
+		        <TD width="18"><IMG height="1" alt="" src="assets/img/images.gif" width="18"></TD>
+	        </TR>
+        </TABLE>
+        
+        <asp:Panel ID="pnladmin" Visible="false" runat="server">
+            <uc1:navadmin id="navadmin" runat="server"></uc1:navadmin>
+        </asp:Panel>
+        
+        <asp:Panel ID="pnlpuser" Visible="false" runat="server">
+            <uc2:navpuser id="navpuser" runat="server"></uc2:navpuser>
+        </asp:Panel>
+        
+        <asp:Panel ID="pnlEstimator" Visible="false" runat="server">
+            <uc3:navestimator id="navestimator" runat="server"></uc3:navestimator>
+        </asp:Panel>
+        
+         <asp:Panel ID="pnlInstaller" Visible="false" runat="server">
+            <uc4:navInstaller id="navInstaller" runat="server"></uc4:navInstaller>
+        </asp:Panel>
+        
+        <!-- BEGIN MAIN CONTENT AREA -->
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <!-- End MAIN CONTENT AREA -->
+        <!-- BEGIN FOOTER -->
+		<TABLE cellSpacing="0" cellPadding="0" width="100%" border="0">
+			<TR>
+				<TD background="assets/img/bot_bg.jpg" bgColor="#df0000"><IMG height="22" alt="" src="assets/img/spacer.gif" width="1"></TD>
+			</TR>
+			<TR>
+				<TD bgColor="#ffffff"><IMG height="1" alt="" src="assets/img/spacer.gif" width="1"></TD>
+			</TR>
+			<TR>
+				<TD background="assets/img/bot_bar.jpg" bgColor="#c6c6c6"><IMG height="13" alt="" src="assets/img/spacer.gif" width="1"></TD>
+			</TR>
+			<TR>
+				<TD vAlign="top" background="assets/img/bot_grad.jpg" bgColor="#ffffff" height="100%">
+					<TABLE cellSpacing="5" cellPadding="5" width="100%" border="0">
+						<TR>
+							<TD colSpan="4"><IMG height="1" alt="" src="assets/img/spacer.gif" width="1"></TD>
+						</TR>
+						<TR>
+							<TD width="10"><IMG height="1" alt="" src="assets/img/spacer.gif" width="10"></TD>
+							<TD class="footer" vAlign="top" width="50%">Copyright © 2010 <A class="footer" href="http://www.whitfield-co.com" target="new">
+									Whitfield-co Inc.,</A><BR>
+								ALL RIGHTS RESERVED<br>
+								Server Name:<b><asp:label id="lblServer" runat="server"></asp:label></b></TD>
+							<TD vAlign="top" align="right" width="50%"><A class="footer" href="mailto:jwhitfield@whitfield-co.com"><IMG height="14" alt="E-Mail" src="assets/img/email.gif" width="14" border="0">
+							&nbsp;E-Mail Administrator</A></TD>
+							<TD width="10"><IMG height="1" alt="" src="assets/img/spacer.gif" width="10"></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+		</TABLE>
+    </div>
+    </form>
+</body>
+</html>

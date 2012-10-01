@@ -1,0 +1,34 @@
+writeExtendedContent : function (loadTime) {
+	if (this.hasExtendedContent) return;
+	var exp = this;
+	this.body = hs.getElementByClass(this.innerContent, 'DIV', 'highslide-body');
+	if (this.objectType == 'iframe') {
+		this.displayLoading();
+		this.ruler = hs.clearing.cloneNode(1);
+		this.body.appendChild(this.ruler);
+		this.newWidth = this.innerContent.offsetWidth;
+		if (!this.objectWidth) this.objectWidth = this.ruler.offsetWidth;
+		var hDiff = this.innerContent.offsetHeight - this.body.offsetHeight;
+		var h = this.objectHeight || (hs.getPageSize()).height - hDiff - hs.marginTop - hs.marginBottom;
+		var onload = (hs.ie && this.objectLoadTime == 'before') ? 
+			'onload="if(hs.expanders['+ this.key +'])hs.expanders['+ this.key +'].contentLoaded();"' : '';
+		var tag = hs.ie ? '<iframe name="hsIframe'+ this.key+ '" '+ onload +'/>' : 'iframe';
+		//var tag = hs.ie ? '<iframe src='blank.html' name="hsIframe'+ this.key+ '" '+ onload +'/>' : 'iframe';
+		this.iframe = hs.createElement(tag, 
+			{ name: 'hsIframe'+ this.key, frameBorder: 0, allowTransparency: true },
+			{ width: this.objectWidth +'px', height: h +'px' }, 
+			this.body);
+		if (this.objectLoadTime == 'before') {
+			if (!hs.ie) this.iframe.onload = function () { if (hs.expanders[exp.key]) exp.contentLoaded(); };
+		}
+		if (hs.safari) this.iframe.src = null;
+		this.iframe.src = hs.getSrc(this.a);
+		
+		if (this.objectLoadTime == 'after') this.correctIframeSize();
+		
+	} else if (this.swfObject) {	
+		this.body.id = this.body.id || 'hs-flash-id-' + this.key;
+		this.swfObject.write(this.body.id);	
+	}
+	this.hasExtendedContent = true;	
+},

@@ -1,0 +1,26 @@
+﻿ SELECT EstNum ,TWC_proj_number 
+                                   ,ProjName 
+                                   ,ProjDescr 
+                                   ,Notes 
+                                   ,ProjType 
+                                   ,BidDate 
+                                   ,AwardDate 
+                                   ,AwardDur 
+                                   ,ConstrStart 
+                                   ,ConstrDur 
+                                   ,ConstrCompl 
+                                   ,GC1 
+                                   ,Status 
+                                   ,ClientType 
+                                   ,WinClient 
+                                   ,WinMill 
+                                   ,ISNULL(FinalPrice,0) FinalPrice 
+                                   ,ISNULL(BaseBid,0) BaseBid  
+                                   ,Negotiated 
+                                   ,Architect 
+                                   ,LEED 
+                                   ,Is_MD_Sales_Tax 
+                                   ,[user].loginid,FirstName + ' ' + LastName as Estimator,Real_proj_Number  
+                                   ,ltrim(rtrim(replace(replace(baseBid,'$',''),',',''))) fmtBaseBid, ltrim(rtrim(replace(replace(FinalPrice,'$',''),',',''))) fmtFinalPrice,pInfo.fab_start,pInfo.fab_end  
+                                    FROM [Whitfielddb].[dbo].[Whitfield_ProjectInfo]  LEFT JOIN [user] on Whitfield_ProjectInfo.Loginid = [user].loginid   
+                                    INNER JOIN ProjectInfo pInfo ON pInfo.EstNum = [Whitfielddb].[dbo].[Whitfield_ProjectInfo].EstNum WHERE  1=1 AND Status = 5
