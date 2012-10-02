@@ -2,6 +2,19 @@
 ## Eclipse
 #################
 
+*.pydevproject
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
 # External tool builders
 .externalToolBuilders/
@@ -84,7 +97,15 @@ DocProject/Help/html
 publish
 
 # Others
-
+[Bb]in
+[Oo]bj
+sql
+TestResults
+*.Cache
+ClientBin
+stylecop.*
+~$*
+*.dbmdl
 Generated_Code #added for RIA/Silverlight projects
 
 # Backup & report files from converting an old project file to a newer
@@ -99,6 +120,8 @@ UpgradeLog*.XML
 ## Windows
 ############
 
+# Windows image file caches
+Thumbs.db
 
 # Folder config file
 Desktop.ini
